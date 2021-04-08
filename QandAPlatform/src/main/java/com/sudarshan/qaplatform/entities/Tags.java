@@ -13,7 +13,7 @@ public class Tags {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "ID")
-	private long id;
+	private Integer id;
 	
 	@Column(name = "Name")
 	private String name;
@@ -22,17 +22,17 @@ public class Tags {
 		super();
 	}
 
-	public Tags(long id, String name) {
+	public Tags(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 
-	public long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
