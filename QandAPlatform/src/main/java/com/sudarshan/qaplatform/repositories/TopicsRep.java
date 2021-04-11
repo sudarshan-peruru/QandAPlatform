@@ -6,4 +6,5 @@ import com.sudarshan.qaplatform.entities.Topics;
 
 public interface TopicsRep extends JpaRepository<Topics, Integer>{
 
+
 }

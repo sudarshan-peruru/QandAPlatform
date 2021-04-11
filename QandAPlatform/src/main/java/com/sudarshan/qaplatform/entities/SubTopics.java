@@ -18,14 +18,14 @@ import org.hibernate.annotations.OnDeleteAction;
 public class SubTopics {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Integer id;
 	
 	@Column(name = "Name")
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "Topic_ID", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
 	private Topics topics;
