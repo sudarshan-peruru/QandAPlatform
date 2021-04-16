@@ -19,12 +19,14 @@ import com.sudarshan.qaplatform.entities.Company;
 import com.sudarshan.qaplatform.entities.SubTopics;
 import com.sudarshan.qaplatform.entities.Tags;
 import com.sudarshan.qaplatform.entities.Topics;
+import com.sudarshan.qaplatform.entities.Users;
 import com.sudarshan.qaplatform.exceptions.EntityNotFoundException;
 import com.sudarshan.qaplatform.exceptions.InvalidInputException;
 import com.sudarshan.qaplatform.service.CompanyService;
 import com.sudarshan.qaplatform.service.SubTopicService;
 import com.sudarshan.qaplatform.service.TagService;
 import com.sudarshan.qaplatform.service.TopicService;
+import com.sudarshan.qaplatform.service.UserService;
 
 @RestController
 @Validated
@@ -39,6 +41,8 @@ public class MastersController {
 	TopicService topicService;
 	@Autowired
 	SubTopicService subTopicService;
+	@Autowired
+	UserService userService;
 	
 	
 	/**********************************************************************************************************
@@ -180,4 +184,39 @@ public class MastersController {
 	public void deleteAllSubTopics() {
 		subTopicService.deleteAllSubTopics();
 	}
+	
+	/**********************************************************************************************************
+	**	User CRUD Controller End Points																	
+	***********************************************************************************************************/
+	
+	@PostMapping("/user/create")
+	public Users createUser(@Valid @RequestBody Users user) {
+		return userService.createUser(user);
+	}
+	
+	@GetMapping("/user/retrive/{id}")
+	public Users retriveUser(@PathVariable(name = "id") @NotNull  int id){
+		return userService.retriveUser(id);
+	}
+	
+	@GetMapping("/user/retriveAll")
+	public List<Users> retriveAllUser() {
+		return userService.retriveAllUsers();
+	}
+	
+	@PostMapping("/user/update")
+	public Users updateUser(@Valid @RequestBody Users user) {
+		return userService.updateUser(user);
+	}
+	
+	@GetMapping("/user/delete/{id}")
+	public void deleteUser(@PathVariable(name = "id") @NotNull int id) {
+		userService.deleteUser(id);
+	}
+	
+	@GetMapping("/user/deleteAll")
+	public void deleteAllUsers() {
+		userService.deleteAllUsers();
+	}
+	
 }

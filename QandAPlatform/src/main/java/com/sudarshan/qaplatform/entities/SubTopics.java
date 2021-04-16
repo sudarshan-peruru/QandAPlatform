@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "Subtopic")
 public class SubTopics {
@@ -25,6 +27,7 @@ public class SubTopics {
 	@Column(name = "Name")
 	private String name;
 	
+	@JsonIgnoreProperties("subTopics")
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "Topic_ID", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -33,6 +36,7 @@ public class SubTopics {
 	public SubTopics() {
 		
 	}
+	
 	public SubTopics(Integer id, String name, Topics topics) {
 		super();
 		this.id = id;

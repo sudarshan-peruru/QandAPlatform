@@ -1,41 +1,33 @@
 package com.sudarshan.qaplatform.entities;
 
-
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 
 @Entity
-@Table(name = "Topic")
-public class Topics {
+@Table(name = "user")
+public class Users {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	
 	@Column(name = "Name")
+	@NotNull
 	private String name;
-	
-	//@JsonManagedReference
-	@JsonIgnoreProperties("subTopics")
-	@OneToMany(mappedBy = "topics")
-	List<SubTopics> subTopics;
 
-	public Topics() {
+	
+	public Users() {
 		super();
 	}
 
-	public Topics(Integer id, String name) {
+	public Users(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -56,15 +48,5 @@ public class Topics {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public List<SubTopics> getSubTopics() {
-		return subTopics;
-	}
-
-	public void setSubTopics(List<SubTopics> subTopics) {
-		this.subTopics = subTopics;
-	}
-	
-	
 	
 }
