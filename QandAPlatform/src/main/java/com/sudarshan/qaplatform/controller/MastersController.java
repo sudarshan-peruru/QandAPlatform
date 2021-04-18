@@ -8,13 +8,16 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sudarshan.qaplatform.DAOs.SubTopicDAO;
 import com.sudarshan.qaplatform.entities.Company;
 import com.sudarshan.qaplatform.entities.SubTopics;
 import com.sudarshan.qaplatform.entities.Tags;
@@ -66,18 +69,18 @@ public class MastersController {
 		return companyService.retriveAllCompany();
 	}
 	
-	@PostMapping("/company/update")
+	@PutMapping("/company/update")
 	public Company updateCompany(@Valid @RequestBody Company company) {
 		return companyService.updateCompany(company);
 	}
 	
-	@GetMapping("/company/delete/{id}")
+	@DeleteMapping("/company/delete/{id}")
 	public void deleteCompany(@PathVariable(name = "id") @NotNull int id) throws InvalidInputException {
 		//if(id == 0) throw new InvalidInputException("QAPlatform : invalid ID given.");
 		companyService.deleteCompany(id);
 	}
 	
-	@GetMapping("/company/deleteAll")
+	@DeleteMapping("/company/deleteAll")
 	public void deleteAllCompany() {
 		companyService.deleteAllCompany();
 	}
@@ -101,17 +104,17 @@ public class MastersController {
 		return tagService.retriveAllTags();
 	}
 	
-	@PostMapping("/tags/update")
+	@PutMapping("/tags/update")
 	public Tags updateTags(@Valid @RequestBody Tags tag) {
 		return tagService.updateTags(tag);
 	}
 	
-	@GetMapping("/tags/delete/{id}")
+	@DeleteMapping("/tags/delete/{id}")
 	public void deleteTag(@PathVariable(name = "id") @NotNull int id) {
 		tagService.deleteTag(id);
 	}
 	
-	@GetMapping("/tags/deleteAll")
+	@DeleteMapping("/tags/deleteAll")
 	public void deleteAllTags() {
 		tagService.deleteAllTags();
 	}
@@ -135,17 +138,17 @@ public class MastersController {
 		return topicService.retriveAllTopics();
 	}
 	
-	@PostMapping("/topics/update")
+	@PutMapping("/topics/update")
 	public Topics updateTopics(@Valid @RequestBody Topics topic) {
 		return topicService.updateTopics(topic);
 	}
 	
-	@GetMapping("/topics/delete/{id}")
+	@DeleteMapping("/topics/delete/{id}")
 	public void deleteTopic(@PathVariable(name = "id") @NotNull int id) {
 		topicService.deleteTopic(id);
 	}
 	
-	@GetMapping("/topics/deleteAll")
+	@DeleteMapping("/topics/deleteAll")
 	public void deleteAllTopics() {
 		topicService.deleteAllTopics();
 	}
@@ -154,10 +157,10 @@ public class MastersController {
 	**	Subtopics CRUD Controller End Points																	
 	***********************************************************************************************************/
 	
-	@PostMapping("/subtopics/create/{id}")
-	public SubTopics createSubTopic(@Valid @RequestBody SubTopics subTopic,@PathVariable(name = "id") @NotNull  int id) {
+	@PostMapping("/subtopics/create")
+	public SubTopics createSubTopic(@Valid @RequestBody SubTopicDAO subTopicDAO) {
 		//System.out.println("Hello???");
-		return subTopicService.createSubTopic(subTopic, id);
+		return subTopicService.createSubTopic(subTopicDAO);
 	}
 	
 	@GetMapping("/subtopics/retrive/{id}")
@@ -170,17 +173,17 @@ public class MastersController {
 		return subTopicService.retriveAllSubTopics();
 	}
 	
-	@PostMapping("/subtopics/update/{id}")
-	public SubTopics updateSubTopics(@Valid @RequestBody SubTopics subTopic,@PathVariable(name = "id") @NotNull  int id) {
-		return subTopicService.updateTopics(subTopic, id);
+	@PutMapping("/subtopics/update")
+	public SubTopics updateSubTopics(@Valid @RequestBody SubTopicDAO subTopicDAO) {
+		return subTopicService.updateTopics(subTopicDAO);
 	}
 	
-	@GetMapping("/subtopics/delete/{id}")
+	@DeleteMapping("/subtopics/delete/{id}")
 	public void deleteSubTopic(@PathVariable(name = "id") @NotNull int id) {
 		subTopicService.deleteSubTopic(id);
 	}
 	
-	@GetMapping("/subtopics/deleteAll")
+	@DeleteMapping("/subtopics/deleteAll")
 	public void deleteAllSubTopics() {
 		subTopicService.deleteAllSubTopics();
 	}
@@ -204,17 +207,17 @@ public class MastersController {
 		return userService.retriveAllUsers();
 	}
 	
-	@PostMapping("/user/update")
+	@PutMapping("/user/update")
 	public Users updateUser(@Valid @RequestBody Users user) {
 		return userService.updateUser(user);
 	}
 	
-	@GetMapping("/user/delete/{id}")
+	@DeleteMapping("/user/delete/{id}")
 	public void deleteUser(@PathVariable(name = "id") @NotNull int id) {
 		userService.deleteUser(id);
 	}
 	
-	@GetMapping("/user/deleteAll")
+	@DeleteMapping("/user/deleteAll")
 	public void deleteAllUsers() {
 		userService.deleteAllUsers();
 	}

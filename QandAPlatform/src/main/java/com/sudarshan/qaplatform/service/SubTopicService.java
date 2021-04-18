@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sudarshan.qaplatform.DAOs.SubTopicDAO;
 import com.sudarshan.qaplatform.entities.SubTopics;
 import com.sudarshan.qaplatform.entities.Topics;
 import com.sudarshan.qaplatform.exceptions.EntityNotFoundException;
@@ -19,9 +20,11 @@ public class SubTopicService {
 	@Autowired
 	TopicsRep topicsRep;
 	
-	public SubTopics createSubTopic(SubTopics subTopic, int fKey) {
-		Topics topics = topicsRep.findById(fKey)
-				.orElseThrow( () -> new EntityNotFoundException("QAPlatform : Topic with id: " + fKey + ", not found. Invalid Foreign Key."));
+	public SubTopics createSubTopic(SubTopicDAO subTopicDAO) {
+		SubTopics subTopic = new SubTopics();
+		subTopic.setName(subTopicDAO.getName());
+		Topics topics = topicsRep.findById(subTopicDAO.getTopicID())
+				.orElseThrow( () -> new EntityNotFoundException("QAPlatform : Topic with id: " + subTopicDAO.getTopicID() + ", not found. Invalid Foreign Key."));
 		subTopic.setTopics(topics);
 		return subTopicsRep.save(subTopic);
 	}
@@ -38,12 +41,15 @@ public class SubTopicService {
 		return subTopicsRep.findAll();
 	}
 	
-	public SubTopics updateTopics(SubTopics subTopic, int fKey) {
-		if(!subTopicsRep.existsById(subTopic.getId())) {
-			throw new EntityNotFoundException("QAPlatform : Subtopic with id: " + subTopic.getId() + ", not found.");
-		}
-		Topics topics = topicsRep.findById(fKey)
-				.orElseThrow( () -> new EntityNotFoundException("QAPlatform : Topic with id: " + fKey + ", not found. Invalid Foreign Key."));
+	public SubTopics updateTopics(SubTopicDAO subTopicDAO) {
+//		if(!subTopicsRep.existsById(subTopicDAO.getId())) {
+//			throw new EntityNotFoundException("QAPlatform : Subtopic with id: " + subTopicDAO.getId() + ", not found.");
+//		}
+		Topics topics = topicsRep.findById(subTopicDAO.getTopicID())
+				.orElseThrow( () -> new EntityNotFoundException("QAPlatform : Topic with id: " + subTopicDAO.getTopicID() + ", not found. Invalid Foreign Key."));
+		SubTopics subTopic = subTopicsRep.findById(subTopicDAO.getId())
+				.orElseThrow(() -> new EntityNotFoundException("QAPlatform : Subtopic with id: " + subTopicDAO.getId() + ", not found."));
+		subTopic.setName(subTopicDAO.getName());
 		subTopic.setTopics(topics);
 		return subTopicsRep.save(subTopic);
 	}

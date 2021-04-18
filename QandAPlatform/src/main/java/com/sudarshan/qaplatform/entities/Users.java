@@ -1,12 +1,16 @@
 package com.sudarshan.qaplatform.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -23,10 +27,20 @@ public class Users {
 	private String name;
 
 	
+//	@OneToMany(mappedBy = "users")
+//	@JsonIgnoreProperties({"questions", "users"})
+//	List<Questions> questions;
+	
 	public Users() {
 		super();
 	}
 
+//	public Users(Integer id, String name) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//	}
+	
 	public Users(Integer id, String name) {
 		super();
 		this.id = id;
@@ -48,5 +62,14 @@ public class Users {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+//	public List<Questions> getQuestions() {
+//		return questions;
+//	}
+//
+//	public void setQuestions(List<Questions> questions) {
+//		this.questions = questions;
+//	}
 	
+
 }
