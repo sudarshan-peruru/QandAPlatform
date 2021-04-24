@@ -5,25 +5,26 @@ import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 
-import com.sudarshan.qaplatform.entities.Tags;
-
-public class QuestionCreateDAO {
+public class QuestionDAO {
 	@NotBlank(message = "QAPlatform : Question text cannot be blank.")
 	private String text;
 	private Integer companyID;
+	//@NotBlank(message = "QAPlatform : Question subtopic cannot be blank.")
 	private Integer subTopicID;
-	private List<Tags> tagsList = new LinkedList<>();
+	private List<Integer> tagsList = new LinkedList<>();
+	//@NotBlank(message = "QAPlatform : User cannot be blank.")
 	private Integer userID;
 
-	public QuestionCreateDAO(String text, Integer companyID, Integer subTopicID, Integer userID) {
+	public QuestionDAO(String text, Integer companyID, Integer subTopicID, Integer userID, List<Integer> tags) {
 		super();
 		this.text = text;
 		this.companyID = companyID;
 		this.subTopicID = subTopicID;
 		this.userID = userID;
+		this.tagsList = tags;
 	}
 	
-	public QuestionCreateDAO() {
+	public QuestionDAO() {
 		super();
 	}
 	
@@ -59,11 +60,11 @@ public class QuestionCreateDAO {
 		this.userID = userID;
 	}
 
-	public List<Tags> getTagsList() {
+	public List<Integer> getTagsList() {
 		return tagsList;
 	}
 
-	public void setTagsList(List<Tags> tagsList) {
+	public void setTagsList(List<Integer> tagsList) {
 		this.tagsList = tagsList;
 	}
 	

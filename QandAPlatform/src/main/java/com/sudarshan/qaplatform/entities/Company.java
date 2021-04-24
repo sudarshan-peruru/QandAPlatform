@@ -1,10 +1,13 @@
 package com.sudarshan.qaplatform.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -21,6 +24,10 @@ public class Company {
 	@NotBlank
 	@Column(name = "Name")
 	private String name;
+	
+	
+	@ManyToMany(mappedBy = "questionCompanies")
+	private List<Questions> companyQuestions;
 
 	public Company() {
 
@@ -47,4 +54,14 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public List<Questions> getCompanyQuestions() {
+		return companyQuestions;
+	}
+
+	public void setCompanyQuestions(List<Questions> companyQuestions) {
+		this.companyQuestions = companyQuestions;
+	}
+	
+	
 }
