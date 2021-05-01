@@ -1,0 +1,17 @@
+DROP TABLE `qa_platform`.`Answer_Likes`;
+CREATE TABLE IF NOT EXISTS `qa_platform`.`Answer_Likes` (
+	`Answer_ID` INT NOT NULL,
+	`User_ID` INT NOT NULL,
+	PRIMARY KEY (`Answer_ID` , `User_ID`),
+	CONSTRAINT `fk_AnsLikes_Answer_ID`
+		FOREIGN KEY (`Answer_ID`)
+		REFERENCES `qa_platform`.`Answers` (`ID`)
+		ON DELETE NO ACTION
+    		ON UPDATE NO ACTION,
+	CONSTRAINT `fk_AnsLikes_User_ID`
+		FOREIGN KEY (`User_ID`)
+		REFERENCES `qa_platform`.`User` (`ID`)
+		ON DELETE NO ACTION
+    		ON UPDATE NO ACTION	
+)
+ENGINE = InnoDB;

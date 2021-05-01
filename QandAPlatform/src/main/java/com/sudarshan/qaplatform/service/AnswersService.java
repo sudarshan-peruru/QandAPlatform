@@ -1,5 +1,7 @@
 package com.sudarshan.qaplatform.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +35,10 @@ public class AnswersService {
 				.orElseThrow(() -> new EntityNotFoundException("QAPlatform : Question with ID: " + answerDAO.getQuestions_ID() + " does not exist."));
 		answer.setQuestions(questions);
 		return answersRep.save(answer);
+	}
+
+
+	public List<Answers> retriveAllAnswers() {
+		return answersRep.findAll();
 	}
 }

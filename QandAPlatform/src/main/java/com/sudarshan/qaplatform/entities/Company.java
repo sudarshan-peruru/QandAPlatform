@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 @Entity
 @Table(name = "Company")
@@ -25,7 +27,7 @@ public class Company {
 	@Column(name = "Name")
 	private String name;
 	
-	
+	@ApiModelProperty(hidden = true)
 	@ManyToMany(mappedBy = "questionCompanies")
 	private List<Questions> companyQuestions;
 

@@ -31,12 +31,12 @@ public class UserService {
 	}
 	
 	public Users updateUser(Users users) {
-		Users user = usersRep.findById(users.getId()).orElseThrow(() -> new EntityNotFoundException("QAPlatform : User with ID: " + users.getId() + " does not exist."));
+		usersRep.findById(users.getId()).orElseThrow(() -> new EntityNotFoundException("QAPlatform : User with ID: " + users.getId() + " does not exist."));
 		return usersRep.save(users);
 	}
 	
 	public void deleteUser(int id) {
-		Users user = usersRep.findById(id).orElseThrow(() -> new EntityNotFoundException("QAPlatform : User with ID: " + id + " does not exist."));
+		usersRep.findById(id).orElseThrow(() -> new EntityNotFoundException("QAPlatform : User with ID: " + id + " does not exist."));
 		usersRep.deleteById(id);
 	}
 	

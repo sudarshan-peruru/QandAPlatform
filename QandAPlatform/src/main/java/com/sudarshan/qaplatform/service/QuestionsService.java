@@ -58,6 +58,10 @@ public class QuestionsService {
 		return questionsRep.save(question);
 	}
 	
+	public List<Questions> retriveAllQuestions() {
+		return questionsRep.findAll();
+	}
+	
 //	public Questions retrive() {
 //		
 //	}
