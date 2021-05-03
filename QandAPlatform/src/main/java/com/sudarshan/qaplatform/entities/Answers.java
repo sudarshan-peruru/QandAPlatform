@@ -26,6 +26,9 @@ public class Answers {
 	
 	@Column(name = "Text")
 	private String text;
+	
+	@Column(name = "Likes_count")
+	private Integer likesCount;
 
 	@JsonIgnoreProperties({"answers"})
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
@@ -75,4 +78,13 @@ public class Answers {
 		this.questions = questions;
 	}
 
+	public Integer getLikesCount() {
+		return likesCount;
+	}
+
+	public void setLikesCount(Integer likesCount) {
+		this.likesCount = likesCount;
+	}
+
+	
 }

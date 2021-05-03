@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
@@ -43,6 +44,9 @@ public class Questions {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Users users;
 	
+	@JsonIgnoreProperties({"answers", "questions"})
+	@OneToMany(mappedBy = "questions")
+	List<Answers> answers;
 	
 	@ManyToMany
 	@JsonIgnoreProperties("companyQuestions")
@@ -129,6 +133,14 @@ public class Questions {
 	public void setQuestionTags(List<Tags> questionTags) {
 		this.questionTags = questionTags;
 	}
+
+	public List<Answers> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<Answers> answers) {
+		this.answers = answers;
+	}
 	
-	
+	 
 }

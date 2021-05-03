@@ -36,8 +36,9 @@ public class AnswersLikesService {
 		
 		Answers answer = answersRep.findById(ansLikesIDClass.getAnswers())
 							.orElseThrow(()-> new EntityNotFoundException("Answer not found"));
+		answer.setLikesCount(answer.getLikesCount()+1);
+		answersRep.save(answer);
 		answersLikes.setAnswers(answer);
-		
 		return answersLikesRep.save(answersLikes);
 		
 	}
