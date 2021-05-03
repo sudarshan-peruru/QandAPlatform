@@ -1,5 +1,7 @@
 package com.sudarshan.qaplatform.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
@@ -41,6 +44,10 @@ public class Answers {
 	@JoinColumn(name = "Questions_ID", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Questions questions;
+	
+	@JsonIgnoreProperties({"answers", "comments"})
+	@OneToMany(mappedBy = "answers")
+	List<Comments> comments;
 	
 	public Answers() {
 		super();
@@ -84,6 +91,14 @@ public class Answers {
 
 	public void setLikesCount(Integer likesCount) {
 		this.likesCount = likesCount;
+	}
+
+	public List<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
 	}
 
 	

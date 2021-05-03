@@ -1,6 +1,7 @@
 package com.sudarshan.qaplatform.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -36,8 +37,11 @@ public class AnswersLikesService {
 		
 		Answers answer = answersRep.findById(ansLikesIDClass.getAnswers())
 							.orElseThrow(()-> new EntityNotFoundException("Answer not found"));
-		answer.setLikesCount(answer.getLikesCount()+1);
-		answersRep.save(answer);
+		Optional<AnswersLikes> ans = answersLikesRep.findById(ansLikesIDClass);
+		if(!ans.isPresent()) {
+			answer.setLikesCount(answer.getLikesCount()+1);
+			answersRep.save(answer);
+		}
 		answersLikes.setAnswers(answer);
 		return answersLikesRep.save(answersLikes);
 		

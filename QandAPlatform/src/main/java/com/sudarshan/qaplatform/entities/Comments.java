@@ -1,5 +1,7 @@
 package com.sudarshan.qaplatform.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +15,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -25,15 +30,21 @@ public class Comments {
 	@Id
 	private Integer id;
 	
+	@Column(name = "Creation_date", updatable = false, insertable = false)
+	@JsonFormat(pattern = "dd-MMM-yyyy HH:mm:ss")
+	private Date creationDate;
+	
 	@Column(name = "Text")
 	private String text;
 	
+	@JsonIgnoreProperties("users")
 	@ApiModelProperty(hidden = true)
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "User_ID", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Users users;
 	
+	@JsonIgnoreProperties("answers")
 	@ApiModelProperty(hidden = true)
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "Answers_ID", nullable = false)
