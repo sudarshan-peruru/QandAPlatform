@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sudarshan.qaplatform.DAOs.AnswerDAO;
 import com.sudarshan.qaplatform.DAOs.CommentDAO;
+import com.sudarshan.qaplatform.DAOs.QueryInDAO;
+import com.sudarshan.qaplatform.DAOs.QueryOutDAO;
 import com.sudarshan.qaplatform.DAOs.QuestionDAO;
 import com.sudarshan.qaplatform.entities.AnsLikesIDClass;
 import com.sudarshan.qaplatform.entities.Answers;
@@ -66,6 +69,18 @@ public class TransactionsController {
 		return questionsService.retriveAllQuestions();
 	}
 	
+	@ApiOperation(value = "Retrive a Question")
+	@GetMapping(value = "/question/retrive/{id}")
+	public Questions retriveQuestion(@PathVariable(name = "id") int id) {
+		return questionsService.retriveQuestion(id);
+	}
+	
+	@ApiOperation(value = "Filter Questions")
+	@PostMapping(value = "/question/filter")
+	public List<QueryOutDAO> filterQuestions(@Valid @RequestBody QueryInDAO queryInDAO) {
+		return questionsService.filterQuestions(queryInDAO);	
+	}
+	
 	/**********************************************************************************************************
 	**	Answer Controller 															
 	***********************************************************************************************************/
@@ -103,14 +118,14 @@ public class TransactionsController {
 	***********************************************************************************************************/
 	
 	@ApiOperation(value = "Create Like to an Answer")
-	@PostMapping(value = "/AnswersLikes/create")
+	@PostMapping(value = "/answersLikes/create")
 	public AnswersLikes createAnswersLikes(@Valid @RequestBody AnsLikesIDClass ansLikesIDClass) {
 		
 		return answersLikesService.createAnswersLikes(ansLikesIDClass);
 	}
 	
 	@ApiOperation(value = "Retrive all Likes to all Answers")
-	@GetMapping(value = "/AnswersLikes/retriveAll")
+	@GetMapping(value = "/answersLikes/retriveAll")
 	public List<AnswersLikes> retriveAllAnswersLikes() {
 		
 		return answersLikesService.retriveallAnswersLikes();
@@ -121,14 +136,14 @@ public class TransactionsController {
 	***********************************************************************************************************/
 	
 	@ApiOperation(value = "Create Like to a Question")
-	@PostMapping(value = "/QuestionsLikes/create")
+	@PostMapping(value = "/questionsLikes/create")
 	public QuestionsLikes createQuestionLikes(@Valid @RequestBody QuesLikesIDClass quesLikesIDClass) {
 		
 		return questionsLikesService.createQuestionsLikes(quesLikesIDClass);
 	}
 	
 	@ApiOperation(value = "Retrive all Likes to all Questions")
-	@GetMapping(value = "/QuestionsLikes/retriveAll")
+	@GetMapping(value = "/questionsLikes/retriveAll")
 	public List<QuestionsLikes> retriveAllQuestionLikes() {
 		
 		return questionsLikesService.retriveAllQuestionsLikes();

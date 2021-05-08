@@ -1,5 +1,6 @@
 package com.sudarshan.qaplatform.entities;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -34,6 +36,10 @@ public class Questions {
 	
 	@Column(name = "Likes_count")
 	private Integer likesCount = 0;
+	
+	@JsonFormat(pattern = "dd-MMM-yyyy HH:mm:ss")
+	@Column(name = "Creation_date", insertable = false, updatable = false)
+	private Date creationDate;
 	
 	@JsonIgnoreProperties({"questions"})
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)

@@ -8,22 +8,24 @@ import javax.validation.constraints.NotBlank;
 public class QuestionDAO {
 	@NotBlank(message = "QAPlatform : Question text cannot be blank.")
 	private String text;
-	private Integer companyID;
+	private List<Integer> companyID;
 	//@NotBlank(message = "QAPlatform : Question subtopic cannot be blank.")
 	private Integer subTopicID;
 	private List<Integer> tagsList = new LinkedList<>();
 	//@NotBlank(message = "QAPlatform : User cannot be blank.")
 	private Integer userID;
 
-	public QuestionDAO(String text, Integer companyID, Integer subTopicID, Integer userID, List<Integer> tags) {
+	
+	
+	public QuestionDAO(String text, List<Integer> companyID, Integer subTopicID, List<Integer> tagsList, Integer userID){
 		super();
 		this.text = text;
 		this.companyID = companyID;
 		this.subTopicID = subTopicID;
+		this.tagsList = tagsList;
 		this.userID = userID;
-		this.tagsList = tags;
 	}
-	
+
 	public QuestionDAO() {
 		super();
 	}
@@ -36,14 +38,14 @@ public class QuestionDAO {
 		this.text = text;
 	}
 	
-	public Integer getCompanyID() {
+	public List<Integer> getCompanyID() {
 		return companyID;
 	}
-	
-	public void setCompanyID(Integer companyID) {
+
+	public void setCompanyID(List<Integer> companyID) {
 		this.companyID = companyID;
 	}
-	
+
 	public Integer getSubTopicID() {
 		return subTopicID;
 	}
